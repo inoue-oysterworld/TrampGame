@@ -1,0 +1,14 @@
+package tramp;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Deck deck=new Deck();
+
+
+		Card card=deck.draw();
+		System.out.println(card.getMark()+"の"+card.getNumber());
+
+	}
+
+}

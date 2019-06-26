@@ -1,0 +1,18 @@
+package tramp;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Deck deck=new Deck();
+		System.out.println(deck.cards.size());
+
+		Card card1=deck.draw();
+		System.out.println(card1.getMark()+"の"+card1.getNumber());//カードのマークと番号を取得
+		Card card2=deck.draw();
+		System.out.println(card2.getMark()+"の"+card2.getNumber());//カードのマークと番号を取得
+		Card card3=deck.draw();
+		System.out.println(card3.getMark()+"の"+card3.getNumber());//カードのマークと番号を取得
+
+	}
+
+}
