@@ -34,18 +34,32 @@ public class Deck {
 	}
 
 
-	public Card draw() {
+
+
+	public int size() {
+		return (cards.size());
+	}
+
+	public boolean drawable() {//ドロー可能判定
+		boolean bool;
+		if(cards.size()>0) {
+			bool=true;
+		}else {
+			bool=false;
+		}
+		return bool;
+	}
+
+	public Card draw() {//ドロー動作
 		int no = cards.size()-1;//山札の一番下を引く
 		Card card=cards.get(no);//インデックスがnoの要素を取得してカード型変数に代入
 		cards.remove(no);//インデックスがnoの要素を削除
 		return card;//カードを返す
 	}
-	public String size() {
-		return (cards.size()+"枚");
-	}
-	/*public void put(Card card) {
 
-	}*/
+	public void put(Card card) {
+		cards.add(card);
+	}
 
 
 }

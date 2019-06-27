@@ -1,0 +1,19 @@
+package tramp;
+
+import lib.Input;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Deck deck=new Deck();
+		deck.shuffle();
+
+		System.out.println("山札は現在"+deck.size()+"です");//デバッグ用
+
+		int count=Input.getInt("何枚引きますか?");//ドローフォームを表示
+		deck.manyDraw();
+
+
+	}
+
+}

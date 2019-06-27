@@ -50,6 +50,41 @@ public class Card {//カード
 
 	}
 
+	int compareTo(Card anotherCard) {
+		int compare;
+		int a=this.power();
+		int b=anotherCard.power();
+		if(a>b) {
+			compare=1;
+		}else if(a<b){
+			compare=-1;
+		}else {
+			compare=0;
+			/*this.getMark();
+			anotherCard.getMark();
+			if(  ) {
+
+			}*/
+		}
+		return compare;
+	}
+
+	int power() {
+		int power;
+		switch(this.number) {
+		case 1:
+			power=14;
+			break;
+		case 14:
+			power=99;
+			break;
+		default:
+			power=this.number;
+		}
+		return power;
+	}
+
+
 
 
 
