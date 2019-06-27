@@ -1,3 +1,0 @@
-INDEX VERSION 1.131+C:\pleiades\eclipse\TrampGame\.metadata\.plugins\org.eclipse.jdt.core
-2261966418.index
-1129149075.index
