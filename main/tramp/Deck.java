@@ -40,7 +40,7 @@ public class Deck {
 		return (cards.size());
 	}
 
-	public boolean drawable() {//ドロー可能判定
+	public boolean drawable() {//ドロー可能判定(nullを返せという課題があるが、なかなか簡潔に書ける方法が思いつかない)
 		boolean bool;
 		if(cards.size()>0) {
 			bool=true;
@@ -51,6 +51,11 @@ public class Deck {
 	}
 
 	public Card draw() {//ドロー動作
+		if(cards.size()==0) {//デッキが0枚だったらnullを返す
+			Card card=null;
+			return card;
+		}
+
 		int no = cards.size()-1;//山札の一番下を引く
 		Card card=cards.get(no);//インデックスがnoの要素を取得してカード型変数に代入
 		cards.remove(no);//インデックスがnoの要素を削除
