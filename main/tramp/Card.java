@@ -6,62 +6,66 @@ public class Card {//カード
 	private int number;//番号
 
 	//ゲッターとセッター
-	public String getMark(){
+	public String getMark() {
 		return mark;
 	}
+
 	public void setMark(String mark) {
-		this.mark=mark;
+		this.mark = mark;
 	}
-	public String getNum(){//絵札変換
+
+	public String getNum() {//絵札変換
 		String picture;
-		switch(this.number) {
+		switch (this.number) {
 		case 1:
-			picture="A";
+			picture = "A";
 			break;
 		case 11:
-			picture="J";
+			picture = "J";
 			break;
 		case 12:
-			picture="Q";
+			picture = "Q";
 			break;
 		case 13:
-			picture="K";
+			picture = "K";
 			break;
 		case 14:
-			picture="Joker";
+			picture = "Joker";
 			break;
 		default:
-			picture=String.valueOf(this.number);//番号カードはそのまま文字列型に変換
+			picture = String.valueOf(this.number);//番号カードはそのまま文字列型に変換
 		}
 		return picture;
 	}
+
 	public void setNum(int number) {
-		this.number=number;
+		this.number = number;
 	}
 
 	//コンストラクタ
-	public Card(String mark,int number){
-		this.mark=mark;
-		this.number=number;
-
-	}
-	public Card(){
-		this("クローバー",2);
+	public Card(String mark, int number) {
+		this.mark = mark;
+		this.number = number;
 
 	}
 
-	int compareTo(Card anotherCard) {	//カードの強さを単純に比較
+	public Card() {
+		this("クローバー", 2);
+
+	}
+
+	int compareTo(Card anotherCard) { //カードの強さを単純に比較
 		int compare;
-		int a=this.power();
-		int b=anotherCard.power();
-		if(a>b) {
-			compare=1;
+		int a = this.power();
+		int b = anotherCard.power();
+		if (a > b) {
+			compare = 1;
 
-		}else if(a<b){
-			compare=-1;
+		} else if (a < b) {
+			compare = -1;
 
-		}else {							//引き分けだった場合、マークでも比較
-			compare=MarkCompareTo(anotherCard);
+		} else { //引き分けだった場合、マークでも比較
+			compare = MarkCompareTo(anotherCard);
 		}
 
 		return compare;
@@ -69,66 +73,62 @@ public class Card {//カード
 
 	int power() {
 		int power;
-		switch(this.number) {
+		switch (this.number) {
 		case 1:
-			power=14;
+			power = 14;
 			break;
 
 		case 14:
-			power=15;
+			power = 15;
 			break;
 
 		default:
-			power=this.number;
+			power = this.number;
 		}
 
 		return power;
 	}
 
-	private int MarkCompareTo(Card anotherCard) {		//マーク比較
-		String[] s= {this.getMark(),anotherCard.getMark()};
-		int[] markCompare=new int[2];
+	private int MarkCompareTo(Card anotherCard) { //マーク比較
+		String[] s = { this.getMark(), anotherCard.getMark() };
+		int[] markCompare = new int[2];
 		int compareResult;
-		for(int i=0;i<2;i++) {
-			switch(s[i]) {
+		for (int i = 0; i < 2; i++) {
+			switch (s[i]) {
 			case "スペード":
-				markCompare[i]=4;
+				markCompare[i] = 4;
 				break;
 
 			case "ハート":
-				markCompare[i]=3;
+				markCompare[i] = 3;
 				break;
 
 			case "ダイヤ":
-				markCompare[i]=2;
+				markCompare[i] = 2;
 				break;
 
 			case "クローバー":
-				markCompare[i]=1;
+				markCompare[i] = 1;
 				break;
 
 			default:
-				markCompare[i]=5;			//ジョーカーは5として扱う
+				markCompare[i] = 5; //ジョーカーは5として扱う
 				break;
 			}
 
 		}
-		if(markCompare[0]>markCompare[1]) {
-			compareResult=1;
+		if (markCompare[0] > markCompare[1]) {
+			compareResult = 1;
 
-		}else if(markCompare[0]<markCompare[1]){
-			compareResult=-1;
+		} else if (markCompare[0] < markCompare[1]) {
+			compareResult = -1;
 
-		}else {
-			compareResult=0;
+		} else {
+			compareResult = 0;
 
 		}
 		return compareResult;
 
 	}
-
-
-
-
 
 }
