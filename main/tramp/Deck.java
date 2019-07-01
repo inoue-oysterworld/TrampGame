@@ -13,14 +13,10 @@ public class Deck {
 	//コンストラクタ
 	public Deck() {
 		cards = new ArrayList<Card>();//カード型のリスト(空の箱を作成)
-		for (int i = 0; i < 52; i++) {//カード型のインスタンスを52枚生成して
-			cards.add(new Card());//リストにカードを追加
-		}
-
 		for (int i = 0; i < marks.length - 2; i++) {//カード型のインスタンスに52個の値をセットする
 			for (int j = 0; j < numbers.length - 1; j++) {//番号を13回ループ
 				Card card = new Card(marks[i], numbers[j]);//各配列に従って値をセット(52個)
-				cards.set(i * 13 + j, card);
+				cards.add(i * 13 + j, card);
 			}
 		}
 		cards.add(new Card(marks[4], numbers[13]));//ジョーカーを2枚作ってリストに追加する
@@ -36,9 +32,9 @@ public class Deck {
 		return (cards.size());
 	}
 
-	public boolean drawable() {//ドロー可能判定(nullを返せという課題があるが、なかなか簡潔に書ける方法が思いつかない)
+	public boolean drawable(int count) {//ドロー可能判定
 		boolean bool;
-		if (cards.size() > 0) {
+		if (this.size() >= count) {
 			bool = true;
 		} else {
 			bool = false;
@@ -48,8 +44,7 @@ public class Deck {
 
 	public Card draw() {//ドロー動作
 		if (cards.size() == 0) {//デッキが0枚だったらnullを返す
-			Card card = null;
-			return card;
+			return null;
 		}
 
 		int no = cards.size() - 1;//山札の一番下を引く

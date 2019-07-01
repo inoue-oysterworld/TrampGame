@@ -49,11 +49,6 @@ public class Card {//カード
 
 	}
 
-	public Card() {
-		this("クローバー", 2);
-
-	}
-
 	int compareTo(Card anotherCard) { //カードの強さを単純に比較
 		int compare;
 		int a = this.power();
@@ -94,27 +89,7 @@ public class Card {//カード
 		int[] markCompare = new int[2];
 		int compareResult;
 		for (int i = 0; i < 2; i++) {
-			switch (s[i]) {
-			case "スペード":
-				markCompare[i] = 4;
-				break;
-
-			case "ハート":
-				markCompare[i] = 3;
-				break;
-
-			case "ダイヤ":
-				markCompare[i] = 2;
-				break;
-
-			case "クローバー":
-				markCompare[i] = 1;
-				break;
-
-			default:
-				markCompare[i] = 5; //ジョーカーは5として扱う
-				break;
-			}
+			markCompare[i] = getMarkPower(s[i]);
 
 		}
 		if (markCompare[0] > markCompare[1]) {
@@ -131,4 +106,60 @@ public class Card {//カード
 
 	}
 
+	private int getMarkPower(String mark) {
+		int markPower;
+		switch (mark) {
+		case "スペード":
+			markPower = 4;
+			break;
+
+		case "ハート":
+			markPower = 3;
+			break;
+
+		case "ダイヤ":
+			markPower = 2;
+			break;
+
+		case "クローバー":
+			markPower = 1;
+			break;
+
+		default:
+			markPower = 5; //ジョーカーは5として扱う
+			break;
+		}
+		return markPower;
+	}
+
+	public static Card createJoker() {
+		Card card = new Card("Joker", 14);
+		return card;
+	}
+
+	public static Card chooseBestCard(Card[] cardArray) {
+		Card strongest = cardArray[0];//一番強いカード
+		for (int i = 1; i < cardArray.length; i++) {//配列長-1回繰り返し
+			if (strongest.power() < cardArray[i].power()) {//最大値と比較
+				if (cardArray[i].power() > strongest.power()) {//配列のi番目とstrongestの大小を比較
+					strongest = cardArray[i];
+
+				} else if (cardArray[i].power() == strongest.power()) {//最大値が等しいとき、マークを比較
+					if (cardArray[i].compareTo(strongest) == 1) {
+						strongest = cardArray[i];
+					} else {
+						//何もしない
+					}
+
+				} else {
+					//何もしない
+				}
+
+			} else {
+				//何もしない
+			}
+
+		}
+		return strongest;
+	}
 }
