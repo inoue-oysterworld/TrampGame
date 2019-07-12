@@ -2,13 +2,12 @@ package tramp;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class Deck {
 	int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
 	String[] marks = { "スペード", "ハート", "ダイヤ", "クローバー", "赤", "黒" };
 
-	private List<Card> cards;//カードリストをカプセル化して所持
+	private ArrayList<Card> cards;//カードリストをカプセル化して所持
 
 	//コンストラクタ
 	public Deck() {
@@ -47,14 +46,18 @@ public class Deck {
 			return null;
 		}
 
-		int no = cards.size() - 1;//山札の一番下を引く
-		Card card = cards.get(no);//インデックスがnoの要素を取得してカード型変数に代入
-		cards.remove(no);//インデックスがnoの要素を削除
+		Card card = cards.get(0);//インデックスが0の要素を取得してカード型変数に代入
+		cards.remove(0);//インデックスが0の要素を削除	//ここでインデックス全体が左にシフトする
 		return card;//カードを返す
 	}
 
-	public void put(Card card) {
+	public void putOnTop(Card card) {//デッキの上に置く
+		cards.add(0,card);
+	}
+
+	public void putDown(Card card) {//デッキの下に置く
 		cards.add(card);
+
 	}
 
 }

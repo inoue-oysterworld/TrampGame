@@ -11,6 +11,7 @@ public class Main {
 						+ "2:デッキを用意して2枚カードを引いて強さを比較する\n"
 						+ "3:デッキを用意してカードを引いて引いた順に置いてまた引いてみる\n"
 						+ "4:デッキを用意して適当にカードを引いて一番強いカードを示す\n"
+						+ "5:ポーカーらしきもの\n"
 						+ "それ以外：終了");
 		int a = Input.getInt("1～4の整数");
 		System.out.println("処理を開始します\n---------------");
@@ -27,7 +28,7 @@ public class Main {
 				if (count == 0) {
 					System.out.println("パスします");
 
-				} else if (deck.size() - count >= 0) {//有効値判定
+				} else if (deck.drawable(count)) {//有効値判定
 
 					for (int i = 0; i < count; i++) {
 						Card card = deck.draw();//カードを1枚引く
@@ -94,7 +95,11 @@ public class Main {
 					}
 					for (int i = count - 1; i >= 0; i--) {
 						System.out.println(cards[i].getMark() + "の" + cards[i].getNum() + "を置きました。");//カードのマークと番号を取得
-						deck.put(cards[i]);//カードを引いた順に置く
+						deck.putOnTop(cards[i]);//カードを引いた順に置く
+					}
+					for (int i = 0; i < count; i++) {
+						cards[i] = deck.draw();//カードを引く
+						System.out.println(cards[i].getMark() + "の" + cards[i].getNum() + "を引きました。");//カードのマークと番号を取得
 					}
 
 				} else {
@@ -130,6 +135,49 @@ public class Main {
 				fourth = Input.getInt("同じルールでまだ続けますか?\nEnter=続行\t1=終了");
 
 			} while (fourth == 0);
+			break;
+
+		case 5:
+			int fifth = 1;
+			int playerDo;//プレイヤーの行動
+			int cardIndex;//カードのインデックス番号
+			boolean endFlag = false;//ゲームの終了判定
+			do {
+
+				//Playerインスタンスを生成
+				Player player = new Player("Player1");
+				Deck deck = new Deck();
+				deck.shuffle();
+				for (int i = 0; i < 5; i++) {
+					player.drawByPlayer(i, deck);//カードを5枚引く
+
+				}
+
+				//ゲーム開始
+				while (!endFlag) {//ゲームが終了していないなら
+					System.out.println(player.getName() + "の番です。");
+					playerDo = Input.getInt("何をしますか?\n1=カードの所持状況を見る");
+					switch (playerDo) {
+
+					case 1:
+						player.showCurrentCardList();
+						break;
+
+					case 2:
+						cardIndex = Input.getInt("何枚目を交換しますか?\n1～5の整数で選択してください");
+						player.changeCard(cardIndex - 1, deck);
+						break;
+
+					default:
+						endFlag = true;//ゲーム終了
+						break;
+
+					}
+				}
+
+				fifth = Input.getInt("同じルールでまだ続けますか?\nEnter=続行\t1=終了");
+
+			} while (fifth == 0);
 			break;
 
 		default:
